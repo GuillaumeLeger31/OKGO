@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
+const dataRoutes = require("./routes/data");
 
 require('dotenv').config();
 mongoose
@@ -34,5 +35,6 @@ app.get('/', function (req, res) {
   res.status(200).send('<h1>Bonjour</h1>')
 });
 
+app.use("/api/data", dataRoutes);
 
 module.exports = app;
