@@ -71,6 +71,30 @@ exports.deleteData = (req, res, next) => {
         );
 };
 
+exports.json2xmlData = (req, res, next) => {
+  Data.findOne({
+      _id: req.params.id,
+  })
+  .then((data) => {
+      var json = JSON.stringify(data);
+      fs.writeFile('data.json', json, function(erreur) {
+          if (erreur) {
+              console.log(erreur)}
+          else {
+              var jsonDoc = require('fs').readFileSync('data.json', 'utf8');
+              var options = {compact: true, ignoreComment: true, spaces: 4};
+              var result = convert.json2xml(jsonDoc, options);
+              res.header("Content-Type", "application/xml");
+              res.status(200).send(result)
+          }
+      })
+  }) 
+  .catch(() =>
+      res.status(400).json({
+      message: "Data non trouvé. .",
+      })
+  ) 
 
+}; 
 
 
