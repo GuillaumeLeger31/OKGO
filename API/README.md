@@ -13,19 +13,19 @@
 ## ENDPOINT
 
 path parameters
-{ id = "61defa25d23f7abaf67deae5"}
+{ _id = "620f449ed389ca3314ace82e"}
 
 
 ### DATA
 * `GET`localhost:3000/api/data
-    * Ajoute dans la BDD les données de la requete et renvoie les infos avec l'{ id }.
-* `GET`localhost:3000/api/data/{ id }
-    * affiche les données d'un id.
-* `PUT`localhost:3000/api/data/{ id }
+    * Ajoute dans la BDD les données de la requete et renvoie les infos avec l'{ _id } (mongodb _id).
+* `GET`localhost:3000/api/data/{ _id }
+    * affiche les données d'un _id.
+* `PUT`localhost:3000/api/data/{ _id }
     * modifie les données d'un id. (ajouter dans le body la paire clef/valeur voulu).
-* `DELETE`localhost:3000/api/data/{ id }
+* `DELETE`localhost:3000/api/data/{ _id }
     * supprime les données d'un id.
-* `GET`localhost:3000/api/data/json2xml/{ id }
+* `GET`localhost:3000/api/data/json2xml/{ _id }
     * convertie et enregistre les données dans un document (/data).
 
 ### FTP

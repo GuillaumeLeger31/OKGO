@@ -23,7 +23,7 @@ exports.getData = (req, res, next) => {
 /* afficher les données */
 exports.showData = (req, res, next) => {
     Data.findOne({
-        id: req.params.id,
+        _id: req.params.id,
       })
         .then((data) => res.status(200).json(data))
         .catch((error) =>
@@ -37,14 +37,14 @@ exports.showData = (req, res, next) => {
 /* mettre à jour les données */
 exports.updateData = (req, res, next) => {
     const dataObject =  {...req.body};
-    Data.updateOne({id: req.params.id} , { ...dataObject})
+    Data.updateOne({_id: req.params.id} , { ...dataObject})
     .then(() =>
       res.status(200).json({
         message: "Data modifié !",
       }))
     .catch((error) =>
       res.status(400).json({
-        error,
+        message: "Data non trouvé.. !",
       })
     );
 
@@ -53,11 +53,11 @@ exports.updateData = (req, res, next) => {
 /* supprimer les données */
 exports.deleteData = (req, res, next) => {
     Data.findOne({
-        id: req.params.id,
+        _id: req.params.id,
       })
       .then((data) => {
             Data.deleteOne({
-            id: req.params.id,
+            _id: req.params.id,
             })
             .then(() => { 
               res.status(200).json({
@@ -70,18 +70,18 @@ exports.deleteData = (req, res, next) => {
                 message: "Data non supprimé...",
               })
             );
+      })
+      .catch(() =>
+        res.status(400).json({
+          message: "Data non trouvé...",
         })
-        .catch(() =>
-          res.status(400).json({
-            message: "Data non trouvé...",
-          })
-        );
+      );
 };
 
 /* convertir et enrefistrer les données */
 exports.json2xmlData = (req, res, next) => {
   Data.findOne({
-      id: req.params.id,
+      _id: req.params.id,
   })
   .then((data) => {
       var json = JSON.stringify(data);
